@@ -110,8 +110,8 @@ class HomePage extends Component {
                 <span className="add-itin"><button className="btn btn-primary" onClick={this.toggleModal}>New</button></span>
               </Header.Content>
             </Header>
-            {this.state.itins ? this.state.itins.map((itin) => (
-              <Card id={"id-" + itin.id} color="red" href={`/#/itinerary?itinID=${itin.id}`}>
+            {this.state.itins ? this.state.itins.map((itin, index) => (
+              <Card key={index} id={"id-" + itin.id} color="red" href={`/#/itinerary?itinID=${itin.id}`}>
                 <Card.Content>
                   <span
                     className="glyphicon glyphicon-remove"
