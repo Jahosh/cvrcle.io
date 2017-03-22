@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-import { AppContainer, LandingContainer, HomePage, Explore } from './containers'
-import { AboutPage, NotFoundPage, Landing, Itinerary } from './components'
+import { AppContainer, LandingContainer, HomePage, ExplorePage } from './containers'
+import { AboutPage, NotFoundPage, Landing, Itinerary, } from './components'
 
 import AuthService from './utils/AuthService'
 
@@ -18,7 +18,7 @@ export default function createRoutes() {
       <IndexRoute component={LandingContainer} />
       <Route path='/home' component={HomePage} onEnter={requireAuth}/>
       <Route path="/itinerary" component={Itinerary} onEnter={requireAuth} />
-      <Route path='/explore' component={Explore} />
+      <Route path='/explore' component={ExplorePage} />
       <Route path='*' component={NotFoundPage} />
       <Route path='/logout' component={NotFoundPage} />
     </Route>
