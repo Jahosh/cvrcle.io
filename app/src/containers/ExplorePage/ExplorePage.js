@@ -8,9 +8,12 @@ import { NavBarContainer } from '../../containers'
 
 const mapStateToProps = (state) => {
   const { isAuthenticated, profile, error } = state.auth
+  const { entries } = state.explore
+  console.log(entries);
   return {
     isAuthenticated,
-    profile
+    profile,
+    entries
   }
 }
 

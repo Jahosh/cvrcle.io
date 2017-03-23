@@ -1,11 +1,21 @@
 import React from 'react';
 import Feed from './Feed.jsx'
 
-const FeedList = ({ props }) => {
-  console.log(props);
+const FeedList = ({ entries }) => {
+  const feedMap = entries.map((entry, i) => (
+
+    <Feed 
+      key={i}
+      name={entry.itinName}
+      isPublic={entry.isPublic}
+      isActive={entry.isActive}
+    />
+    )
+  )
+
   return (
     <div>
-      
+      { feedMap }
     </div>
   );
 };

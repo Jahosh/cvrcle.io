@@ -12,7 +12,7 @@ export default function exploreReducer(state = {
     case ActionTypes.FETCH_ENTRIES_REQUEST:
       return { ...state, isFetching: true, error: null }
     case ActionTypes.FETCH_ENTRIES_SUCCESS:
-      return {...state, isFetching: false, error: null}
+      return {...state, isFetching: false, entries: action.entries, error: null}
     default:
       return state
   }

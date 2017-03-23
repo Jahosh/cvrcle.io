@@ -16,18 +16,9 @@ class ExplorePage extends React.Component {
     // this.props.checkLogin() // check is Auth0 lock is authenticating after login callback
   }
   componentWillMount() {
-    console.log(' this is props', this.props)
     this.props.onFetchClick();
-    // this.grabProfiles()
   }
-  grabProfiles() {
-    axios.get('http://localhost:3000/itineraries').then( (resp) => {
-      console.log(resp);
-
-      this.setState({
-        entries: resp.data
-      });
-    });
+  componentDidMount() {
   }
   render() {
     return (
@@ -41,7 +32,7 @@ class ExplorePage extends React.Component {
           </Header.Content>
         </Header>
         <FeedList
-          entries={[]}
+          entries={this.props.entries}
         />
       </div>
     )
