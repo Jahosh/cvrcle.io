@@ -12,7 +12,7 @@ function recievedEntries(entries) {
   return {
     type: FETCH_ENTRIES_SUCCESS,
     entries,
-    recievedAt: Date.now()
+    receivedAt: Date.now()
   }
 }
 
