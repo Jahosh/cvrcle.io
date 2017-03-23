@@ -28,7 +28,7 @@ export function fetchEntries() {
   return dispatch => {
     dispatch(requestEntries())
 
-    return axios.get('http://localhost:3000/itineraries')
+    return axios.get('http://localhost:3000/explore')
       .then(response => dispatch(recievedEntries(response.data)))
       .catch(e => fetchEntriesFailure(e))
   }

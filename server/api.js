@@ -111,4 +111,18 @@ module.exports = (app) => {
       .catch(next);
   })
 
+  /**
+   *  Explore Page Routes ~
+   */
+
+  app.get('/explore', (req, res, next) => {
+    Itinerary
+      .query()
+      .allowEager('[owner]')
+      .eager('owner')
+      .skipUndefined()
+      .where('id', req.query.id)
+      .then(itineraries => res.send(itineraries))
+      .catch(next);
+  })
 };

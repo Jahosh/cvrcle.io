@@ -8,11 +8,11 @@ import { NavBarContainer } from '../../containers'
 
 const mapStateToProps = (state) => {
   const { isAuthenticated, profile, error } = state.auth
-  const { entries } = state.explore
-  console.log(entries);
+  const { entries, isFetching } = state.explore
   return {
     isAuthenticated,
     profile,
+    isFetching,
     entries
   }
 }
@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) => {
     onFetchClick: () => {
       dispatch(fetchEntries())
     },
+    checkLogin: () => {
+      dispatch(checkLogin())
+    }
   }
 }
 

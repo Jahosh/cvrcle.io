@@ -1,17 +1,19 @@
 import React from 'react';
 import { Feed, Icon } from 'semantic-ui-react'
+import { Link } from 'react-router'
 
 const EntryFeed = (props) => {
-  console.log(props, 'from entry feed');
   return (
-    <div className="ui two column centered grid">
+    <div className="centered">
+    <div className="ui two column grid">
       <Feed size='large'>
         <Feed.Event>
           <Feed.Label>
+            <Icon name='travel' size='massive' />
           </Feed.Label>
           <Feed.Content>
             <Feed.Summary>
-              { props.name }
+              <Link to={`/itinerary?itinID=${props.id}`}> { props.name } </Link>
             </Feed.Summary>
             <Feed.Meta>
               <Feed.Like>
@@ -22,6 +24,7 @@ const EntryFeed = (props) => {
           </Feed.Content>
         </Feed.Event>
       </Feed>      
+    </div>
     </div>
   );
 };
