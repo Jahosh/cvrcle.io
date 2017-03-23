@@ -78,6 +78,10 @@
   margin: auto;
 }
 
+.ui.card.explore {
+  margin: 0;
+}
+
 .ui.card:hover {
   cursor: pointer;
   text-decoration: none;
@@ -246,4 +250,5 @@
   margin-top: 100px;
   width: 325px;
 }
+
 

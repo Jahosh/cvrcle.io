@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Feed, Icon } from 'semantic-ui-react'
+import { Feed, Icon, Card } from 'semantic-ui-react'
 import { Link } from 'react-router'
 
 const EntryFeed = ({ owner, created_at, id, name }) => {
@@ -10,9 +10,13 @@ const EntryFeed = ({ owner, created_at, id, name }) => {
           <Feed.Label icon='travel'>
           </Feed.Label>
           <Feed.Content>
-            <Feed.Date>{ created_at } </Feed.Date>
             <Feed.Summary>
-             { ownerName } shared  <Link to={`/itinerary?itinID=${id}`}> { name } </Link>
+             { ownerName } posted
+             <Card className='explore' href={`/#/itinerary?itinID=${id}`}>
+              <Card.Content>
+                { name }
+              </Card.Content>
+             </Card>
             </Feed.Summary>
             <Feed.Meta>
               <Feed.Like>

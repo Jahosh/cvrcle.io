@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavBarContainer } from '../../containers'
 import { connect } from 'react-redux'
-import { Header, Icon, Image } from 'semantic-ui-react'
+import { Header, Icon, Image, Grid } from 'semantic-ui-react'
 import axios from "axios"
 
 import Feed from './Feed.jsx'
@@ -24,21 +24,33 @@ class ExplorePage extends React.Component {
   render() {
     return (
       // navbar persists throughout the whole app
-      <div>
-        <Header as='h1' icon textAlign='center'>
-          <Icon name='users' circular />
-          <Header.Content>
-            itineraries
-          </Header.Content>
-        </Header>
-        { this.props.isFetching ? 
-          <FeedLoader /> 
-        :
-          <FeedList
-            entries={this.props.entries}
-          />
-        }
-      </div>
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <div>
+              <Header as='h1' icon textAlign='center'>
+                <Icon name='users' circular />
+                <Header.Content>
+                  itineraries
+                </Header.Content>
+              </Header>
+            </div>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row centered columns={1}>
+          <Grid.Column width={6}>
+            <div>
+              { this.props.isFetching ? 
+                <FeedLoader /> 
+              :
+                <FeedList
+                  entries={this.props.entries}
+                />
+              }
+            </div>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }
