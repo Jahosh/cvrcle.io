@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { checkLogin } from '../../actions/auth'
+import { requestEntries, fetchEntries, recievedEntries } from '../../actions/explore'
 import { Explore } from '../../components'
 
 import React from 'react'
@@ -13,5 +14,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-const ExplorePage = connect(mapStateToProps)(Explore)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchClick: () => {
+      dispatch(fetchEntries())
+    },
+  }
+}
+
+const ExplorePage = connect(mapStateToProps, mapDispatchToProps)(Explore)
 export default ExplorePage

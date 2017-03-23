@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import { Header, Icon, Image } from 'semantic-ui-react'
 import axios from "axios"
 
+import Feed from './Feed.jsx'
+import FeedList from './FeedList.jsx'
+
 // default view for the app
 // see /src/routes for routes for this.props.children
 
@@ -11,15 +14,22 @@ class ExplorePage extends React.Component {
   constructor(props) {
     super(props)
     // this.props.checkLogin() // check is Auth0 lock is authenticating after login callback
-    console.log(props)
+  }
+  componentWillMount() {
+    console.log(' this is props', this.props)
+    this.props.onFetchClick();
+    // this.grabProfiles()
   }
   grabProfiles() {
     axios.get('http://localhost:3000/itineraries').then( (resp) => {
       console.log(resp);
+
+      this.setState({
+        entries: resp.data
+      });
     });
   }
   render() {
-    this.grabProfiles();
     return (
       // navbar persists throughout the whole app
       <div>
@@ -30,6 +40,9 @@ class ExplorePage extends React.Component {
             itineraries
           </Header.Content>
         </Header>
+        <FeedList
+          entries={[]}
+        />
       </div>
     )
   }
