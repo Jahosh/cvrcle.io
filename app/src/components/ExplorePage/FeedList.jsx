@@ -9,6 +9,8 @@ const FeedList = ({ entries }) => {
       isPublic={entry.isPublic}
       isActive={entry.isActive}
       id={entry.id}
+      owner={entry.owner}
+      created_at={entry.created_at}
     />
     )
   )

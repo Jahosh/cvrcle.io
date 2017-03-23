@@ -18,7 +18,7 @@ export default function createRoutes() {
       <IndexRoute component={LandingContainer} />
       <Route path='/home' component={HomePage} onEnter={requireAuth}/>
       <Route path="/itinerary" component={Itinerary} onEnter={requireAuth} />
-      <Route path='/explore' component={ExplorePage} />
+      <Route path='/explore' component={ExplorePage} onEnter={requireAuth} />
       <Route path='*' component={NotFoundPage} />
       <Route path='/logout' component={NotFoundPage} />
     </Route>

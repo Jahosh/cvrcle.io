@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Feed, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router'
 
-const EntryFeed = (props) => {
+const EntryFeed = ({ owner, created_at, id, name }) => {
+  const ownerName = `${ owner.firstName } ${ owner.lastName }`
   return (
-    <div className="centered">
-    <div className="ui two column grid">
       <Feed size='large'>
         <Feed.Event>
-          <Feed.Label>
-            <Icon name='travel' size='massive' />
+          <Feed.Label icon='travel'>
           </Feed.Label>
           <Feed.Content>
+            <Feed.Date>{ created_at } </Feed.Date>
             <Feed.Summary>
-              <Link to={`/itinerary?itinID=${props.id}`}> { props.name } </Link>
+             { ownerName } shared  <Link to={`/itinerary?itinID=${id}`}> { name } </Link>
             </Feed.Summary>
             <Feed.Meta>
               <Feed.Like>
@@ -24,9 +23,11 @@ const EntryFeed = (props) => {
           </Feed.Content>
         </Feed.Event>
       </Feed>      
-    </div>
-    </div>
   );
 };
+
+Feed.propTypes = {
+
+}
 
 export default EntryFeed 
