@@ -33,3 +33,25 @@ export function fetchEntries() {
       .catch(e => fetchEntriesFailure(e))
   }
 }
+
+/**
+ *  Search Actions
+ */
+export const SEARCH_ENTRIES_REQUEST = 'SEARCH_ENTRIES_REQUEST'
+export function searchEntriesRequest(value) {
+  return {
+    type: SEARCH_ENTRIES_REQUEST,
+    value
+  }
+}
+
+export const SEARCH_ENTRIES_SUCCESS = 'SEARCH_ENTRIES_SUCCESS'
+function searchEntriesSuccess(foundEntries) {
+  return {
+    type: SEARCH_ENTRIES_SUCCESS,
+    foundEntries
+  }
+}
+
+
+
