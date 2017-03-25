@@ -21,7 +21,7 @@ const EntryFeed = ({ owner, created_at, id, name }) => {
             <Feed.Meta>
               <Feed.Like>
                 <Icon name='like' />
-                  create playlist
+                  view playlist
               </Feed.Like>
             </Feed.Meta>
           </Feed.Content>

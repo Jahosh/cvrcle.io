@@ -2,6 +2,7 @@ const objection = require('objection');
 const User = require('./models/User');
 const Itinerary = require('./models/Itinerary');
 const Entry = require('./models/Entry');
+const Playlist = require('./models/Playlist');
 
 // we should refactor this to DRY out the code and instead use
 // express.router and controllers modularly
@@ -124,5 +125,14 @@ module.exports = (app) => {
       .where('id', req.query.id)
       .then(itineraries => res.send(itineraries))
       .catch(next);
+  })
+
+  app.get('/playlist', (req, res, next) => {
+    Playlist
+      .query()
+      .skipUndefined()
+      .where('id', req.query.id)
+      .then(song => console.log(song))
+      .catch(next)
   })
 };

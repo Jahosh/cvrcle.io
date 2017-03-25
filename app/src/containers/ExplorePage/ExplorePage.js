@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleSearch: (e, value) => {
       dispatch(searchEntriesRequest(value))
-    }
+    },
   }
 }
 

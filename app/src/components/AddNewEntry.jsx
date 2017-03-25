@@ -1,23 +1,33 @@
-import React, { Component } from 'react';
-import EntryModal from '../containers/EntryModal.jsx';
-import { Button }  from 'react-bootstrap';
+import React, { Component } from 'react'
+import EntryModal from '../containers/EntryModal.jsx'
+import TrackModal from '../containers/TrackModal.jsx'
+import { Button }  from 'react-bootstrap'
+import { Button as Btn } from 'semantic-ui-react'
 
 // add new entry Button
 
 class AddNewEntry extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      isClicked: false,
+      EntryModalIsClicked: false,
+      TrackModalIsClicked: false,
     }
-    this.toggleModal = this.toggleModal.bind(this);
-    this.updateEntry = this.updateEntry.bind(this);
+    this.toggleTrackModal = this.toggleTrackModal.bind(this)
+    this.toggleEntryModal = this.toggleEntryModal.bind(this)
+    this.updateEntry = this.updateEntry.bind(this)
   }
 
   // default state is closed modal
-  toggleModal() {
+  toggleEntryModal() {
     this.setState({
-      isClicked: !this.state.isClicked
+      EntryModalIsClicked: !this.state.EntryModalIsClicked
+    })
+  }
+
+  toggleTrackModal() {
+    this.setState({
+      TrackModalIsClicked: !this.state.TrackModalIsClicked
     })
   }
 
@@ -32,18 +42,29 @@ class AddNewEntry extends Component {
   render() {
     return (
       <span>
-        {this.state.isClicked ? 
+        {this.state.EntryModalIsClicked ? 
           <EntryModal 
-            resetFlag={this.toggleModal} 
+            resetFlag={this.toggleEntryModal} 
             updateEntry={this.updateEntry}
             newEntryAdded={this.props.newEntryAdded}
           /> : ""}
-        <Button 
+
+        {this.state.TrackModalIsClicked ?
+          <TrackModal
+            resetFlag={this.toggleTrackModal}
+            
+          /> : "" }
+        <Btn
+          primary
           id={this.state.id} 
-          bsStyle="default"
-          className="entry btn-primary"
-          onClick={this.toggleModal}>Add New Entry
-        </Button>
+          className="entry"
+          onClick={this.toggleEntryModal}>Add New Entry
+        </Btn>
+        {'  '}
+        <Btn
+          secondary
+          onClick={this.toggleTrackModal}>Add A Song
+        </Btn>
       </span>
     );
   }

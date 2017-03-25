@@ -1,7 +1,8 @@
 import React from 'react'
 import { NavBarContainer } from '../../containers'
 import { connect } from 'react-redux'
-import { Header, Icon, Image, Grid, Search } from 'semantic-ui-react'
+import { Link } from 'react-router'
+import { Header, Icon, Image, Grid, Search, Container } from 'semantic-ui-react'
 import axios from "axios"
 
 import Feed from './Feed.jsx'
@@ -11,18 +12,15 @@ import FeedLoader from './FeedLoader.jsx'
 // default view for the app
 // see /src/routes for routes for this.props.children
 
-const SearchRender = ({ id, itinName, owner }) => {
+const SearchRender = ({id, itinName }) => {
   return (
-    <Grid>
-      <Grid.Row centered columns={1}>
-      <div className='result' key={id}>
+      <div className='ui result'key={id} >
         <div className='main'>
-          <div className='title'>{itinName}</div>
+            <Link to={`/itinerary?itinID=${id}`}>
+              <div className='title'>{itinName}</div>
+            </Link>
         </div>
       </div>
-      </Grid.Row>
-    </Grid>
-
   )
 }
 
@@ -40,6 +38,7 @@ class ExplorePage extends React.Component {
     const { handleSearch, entries, results } = this.props;
     return (
       // navbar persists throughout the whole app
+      <Container>
       <Grid>
         <Grid.Row centered columns={1}>
           <Grid.Column width={16}>
@@ -53,17 +52,20 @@ class ExplorePage extends React.Component {
             </div>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row centered columns={1}>
-          <Grid.Column width={16}>
+        <Grid.Row centered columns={3}>
+          <Grid.Column width={8}>
+          <div>
             <Search
               resultRenderer={SearchRender}
               onSearchChange={handleSearch}
               value={this.props.searchTerm}
+              input='text'
               results={results}
             />
+            </div>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row centered columns={1}>
+        <Grid.Row columns={1}>
           <Grid.Column width={6}>
             <div>
               { this.props.isFetching ? 
@@ -77,6 +79,7 @@ class ExplorePage extends React.Component {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      </Container>
     )
   }
 }

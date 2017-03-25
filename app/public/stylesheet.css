@@ -251,4 +251,25 @@
   width: 325px;
 }
 
+.add-track-modal {
+  width: 90%;
+}
 
+.ui.feed>.event>.label img {
+   width: 100px; 
+  border-radius: 500rem;
+}
+
+.ui.feed>.event>.label+.content {
+  font-size: 14px;
+  margin: .5em 0 .35714286em 1.14285714em;
+  margin-top: 0.5em;
+  margin-right: 0px;
+  margin-bottom: 0.357143em;
+  margin-left: 100px;
+}
+
+.track-image {
+    height: 200px;
+    box-shadow: 5px 5px 5px #888888;
+}
