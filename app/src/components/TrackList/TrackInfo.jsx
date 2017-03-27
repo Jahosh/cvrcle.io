@@ -3,11 +3,15 @@ import { Image } from 'react-bootstrap'
 import { Progress, Timer } from 'react-soundplayer/components'
 
 const TrackInfo = (props) => {
-  const { duration, currentTime, track } = props
+  const { duration, currentTime, track, initSoundCloudAudio, soundCloudAudio, handleUpdatePlayerTime } = props
   let artwork = '';
-  if (track.artwork_url) {
-    artwork = track.artwork_url.replace('-large', '-t500x500');
-    document.getElementById('track-artwork').classList.add('track-image')
+  try {
+    if (track.artwork_url) {
+      artwork = track.artwork_url.replace('-large', '-t500x500');
+      document.getElementById('track-artwork').classList.add('track-image')
+    }  
+  } catch (err) {
+    console.log(err)
   }
   return (
     <div className='text-center'>

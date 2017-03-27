@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Button, Modal, Form, FormGroup, FormControl, ControlLabel, PageHeader, Grid, Row, Col } from 'react-bootstrap'
-import { fetchTracks, playTrack } from '../actions/soundcloud'
+import { fetchTracks, playTrack, initPlayer, updatePlayer } from '../actions/soundcloud'
+import { fetchEntries } from '../actions/explore'
 import { connect } from 'react-redux'
 
 import TrackList from '../components/TrackList/TrackList.jsx'
@@ -23,6 +24,7 @@ class TrackModal extends Component {
       formBody: "",
       address: '',
       contributorID: '',
+      
     }
     // function binds
     this.close = this.close.bind(this)
@@ -30,6 +32,11 @@ class TrackModal extends Component {
     this.getQueryParams = this.getQueryParams.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.itinID = Number(this.getQueryParams('itinID'))
+  }
+  componentWillMount() {
+    const { soundcloud } = this.props;
+
+    this.props.onFetchTracksClick('Tunji Ige')
   }
   close() {
     this.setState({ showModal: false }, () => {
@@ -39,7 +46,6 @@ class TrackModal extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     const title = this.state.formTrackTitle
-    console.log(title, 'search')
     this.props.onFetchTracksClick(title)
     this.setState({
       formTrackTitle: ''
@@ -87,7 +93,6 @@ class TrackModal extends Component {
     this.props.onSelectedTrack(track)
   }
   render() {
-    console.log(this.props, 'from track modal')
     // cssClasses and myStyles is req'd for styling location search bar
     const cssClasses = {
       root: 'form-group',
@@ -101,7 +106,7 @@ class TrackModal extends Component {
       autocompleteItemActive: { color: 'blue' }
     }
     
-    const { soundcloud } = this.props;
+    const { soundcloud, profile } = this.props;
     return (
       <Modal bsSize="large" dialogClassName="add-track-modal" show={this.state.showModal} onHide={this.close}>
         <Modal.Header closeButton>
@@ -128,6 +133,13 @@ class TrackModal extends Component {
 
           <Player 
             track={soundcloud.selectedTrack}
+            profile={profile}
+            itinID={this.itinID}
+            contributorID={this.state.contributorID}
+            refreshPlaylist={this.props.refreshPlaylist}
+            showModal={this.state.showModal}
+            initSoundCloudAudio={this.props.initSoundCloudAudio}
+            handleUpdatePlayerTime={this.props.onUpdatePlayerTime}
           />
           <hr />
           <TrackList
@@ -146,10 +158,7 @@ const mapStateToProps = (state) => {
   const { isAuthenticated, profile, error } = state.auth
   const { tracks, isFetching } = state.soundcloud
   return {
-    isAuthenticated,
-    profile,
     soundcloud: state.soundcloud,
-    error
   }
 }
 
@@ -160,6 +169,15 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSelectedTrack: (track) => {
       dispatch(playTrack(track))
+    },
+    refreshPlaylist: () => {
+      dispatch(fetchEntries())
+    },
+    initSoundCloudAudio: (sc_audio) => {
+      dispatch(initPlayer(sc_audio))
+    },
+    onUpdatePlayerTime: (currentTime) => {
+      dispatch(updatePlayer(currentTime))
     }
   }
 }

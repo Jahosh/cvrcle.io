@@ -37,7 +37,7 @@ export function fetchTracks(title) {
   return dispatch => {
     dispatch(requestTracks())
 
-    return SC.get('/tracks', { q: title })
+    return SC.get('/tracks', { q: title, limit: 20 })
       .then(tracks => {
         dispatch(recievedTracks(tracks))
       })
@@ -51,5 +51,21 @@ export function playTrack(track) {
   return {
     type: PLAY_TRACK,
     track
+  }
+}
+
+export const INIT_SC_PLAYER = 'INIT_SC_PLAYER'
+export function initPlayer(sc_audio) {
+  return {
+    type: INIT_SC_PLAYER,
+    sc_audio
+  }
+}
+
+export const UPDATE_PLAYER_TIME = 'UPDATE_PLAYER_TIME'
+export function updatePlayer(currentTime) {
+  return {
+    type: UPDATE_PLAYER_TIME,
+    currentTime
   }
 }

@@ -30,11 +30,13 @@ exports.up = function(knex, Promise) {
       table.integer('itinID').unsigned().references('id').inTable('itineraries').onDelete('CASCADE');
       table.timestamps(true);
     })
-    .createTable('playlist', (table) => {
+    .createTable('track', (table) => {
       table.increments('id').primary();
       table.integer('ownerID').unsigned().references('id').inTable('users').onDelete('CASCADE');
       table.integer('itinID').unsigned().references('id').inTable('itineraries').onDelete('CASCADE');
       table.string('name', 255);
+      table.string('artwork', 255);
+      table.string('stream_url', 255);
       table.timestamps(true);
     })
 };

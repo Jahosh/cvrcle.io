@@ -52,21 +52,15 @@ class ExplorePage extends React.Component {
             </div>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row centered columns={3}>
-          <Grid.Column width={8}>
+        <Grid.Row>
+          <Grid.Column width={16}>
           <div>
-            <Search
-              resultRenderer={SearchRender}
-              onSearchChange={handleSearch}
-              value={this.props.searchTerm}
-              input='text'
-              results={results}
-            />
+
             </div>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row columns={1}>
-          <Grid.Column width={6}>
+        <Grid.Row>
+          <Grid.Column width={12}>
             <div>
               { this.props.isFetching ? 
                 <FeedLoader /> 

@@ -5,16 +5,26 @@ import React from 'react'
 import Controls from './Controls.jsx'
 import TrackInfo from './TrackInfo.jsx'
 
-
 const Player = ( props ) => {
-  const { track } = props;
+  const { track, profile, itinID, contributorID, refreshPlaylist, showModal, initSoundCloudAudio, handleUpdatePlayerTime } = props
   return (
     <div>
       <SoundPlayerContainer clientId={SOUNDCLOUD_API_KEY} streamUrl={track.stream_url}>
         <TrackInfo
           track={track} 
+          initSoundCloudAudio={initSoundCloudAudio}
+          handleUpdatePlayerTime={handleUpdatePlayerTime}
         />
-        <Controls />
+        <Controls
+          handleUpdatePlayerTime={handleUpdatePlayerTime}
+          track={track}
+          profile={profile}
+          itinID={itinID}
+          contributorID={contributorID}
+          refreshPlaylist={refreshPlaylist}
+          showModal={showModal}
+          initSoundCloudAudio={initSoundCloudAudio}
+        />
       </SoundPlayerContainer>
     </div>
   );

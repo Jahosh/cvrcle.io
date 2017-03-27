@@ -273,3 +273,11 @@
     height: 200px;
     box-shadow: 5px 5px 5px #888888;
 }
+
+.Footer{
+  background-color:black;
+  height:50px;
+  color: white;
+  position: fixed;
+  width:100%;
+}

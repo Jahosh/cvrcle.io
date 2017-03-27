@@ -3,21 +3,23 @@ const User = require('./User')
 const Itinerary = require('./Itinerary')
 const Entry = require('./Entry')
 
-class Playlist extends Model {
+class Track extends Model {
   static get tableName() {
-    return 'playlist'
+    return 'track'
   }
 
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['ownerID', 'itinID' ],
+      required: ['ownerID', 'itinID', 'name', 'artwork', 'stream_url' ],
 
       properties: {
         id: { type: 'integer' },
         ownerID: { type: 'string', minLength: 1, maxLength: 255 },
         itinID: { type: 'string', minLength: 1, maxLength: 255 },
-        name: { type: 'string', minLength: 1, maxLength: 255 }
+        name: { type: 'string', minLength: 1, maxLength: 255 },
+        artwork: { type: 'string', minLength: 1, maxLength: 255 },
+        stream_url: { type: 'string', minLength: 1, maxLength: 255 }
       }
     };
   }
@@ -29,7 +31,7 @@ class Playlist extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: __dirname + '/User',
         join: {
-          from: 'playlist.ownerID',
+          from: 'track.ownerID',
           to: 'users.id'
         }
       },
@@ -38,8 +40,8 @@ class Playlist extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: __dirname + '/Itinerary',
         join: {
-          from: 'playlist.itinID',
-          to: 'itinerary.id'
+          from: 'track.itinID',
+          to: 'itineraries.id'
         }
       }
     }
@@ -48,4 +50,4 @@ class Playlist extends Model {
 
 }
 
-module.exports = Playlist;
+module.exports = Track;

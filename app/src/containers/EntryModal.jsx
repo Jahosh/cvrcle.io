@@ -5,6 +5,7 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 import { connect } from 'react-redux';
 import GOOGLE_API_KEY from '../../../config.js';
+import { fetchEntries } from '../actions/explore'
 
 const qs = require('qs');
 
@@ -27,7 +28,6 @@ class EntryModal extends Component {
 
     this.itinID = Number(this.getQueryParams('itinID'));
   }
-
   close() {
     this.setState({showModal: false}, () => {
       this.props.resetFlag();
@@ -183,11 +183,21 @@ class EntryModal extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchClick: () => {
+      dispatch(fetchEntries())
+    }
+  }
+}
+
 const mapStateToProps = (state) => {
   const { isAuthenticated, profile, error } = state.auth
+  const { entries } = state.explore
   return {
     isAuthenticated,
-    profile
+    profile,
+    entries
   }
 }
 

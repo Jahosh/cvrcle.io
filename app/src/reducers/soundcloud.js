@@ -2,10 +2,6 @@ import * as ActionTypes from '../actions/soundcloud'
 import AuthService from '../utils/AuthService'
 
 export default function soundcloudReducer(state = {
-  isAuthenticated: !AuthService.isTokenExpired(),
-  isFetching: false,
-  profile: AuthService.getProfile(),
-  error: null,
   tracks: [],
   selectedTrack: {}
 }, action) {
@@ -17,7 +13,11 @@ export default function soundcloudReducer(state = {
     case ActionTypes.FETCH_TRACKS_FAILURE:
       return {...state, isFetching: false, error: action.error }
     case ActionTypes.PLAY_TRACK:
-    return {...state, selectedTrack: action.track }
+      return {...state, selectedTrack: action.track }
+    case ActionTypes.INIT_SC_PLAYER:
+      return {...state, soundcloudAudio: action.sc_audio }
+    case ActionTypes.UPDATE_PLAYER_TIME:
+      return {...state, currentPlayerTime: action.currentTime }
     default:
       return state
   }

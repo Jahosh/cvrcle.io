@@ -41,6 +41,15 @@ class Itinerary extends Model {
           from: 'itineraries.id',
           to: 'entries.itinID'
         }
+      },
+
+      tracks: {
+        relation: Model.HasManyRelation,
+        modelClass: __dirname + '/Track',
+        join: {
+          from: 'itineraries.id',
+          to: 'track.itinID'
+        }
       }
     }
 

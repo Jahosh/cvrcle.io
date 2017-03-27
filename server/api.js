@@ -2,7 +2,7 @@ const objection = require('objection');
 const User = require('./models/User');
 const Itinerary = require('./models/Itinerary');
 const Entry = require('./models/Entry');
-const Playlist = require('./models/Playlist');
+const Track = require('./models/Track');
 
 // we should refactor this to DRY out the code and instead use
 // express.router and controllers modularly
@@ -119,20 +119,28 @@ module.exports = (app) => {
   app.get('/explore', (req, res, next) => {
     Itinerary
       .query()
-      .allowEager('[owner, entries]')
-      .eager('[owner, entries]')
+      .allowEager('[owner, entries, tracks]')
+      .eager('[owner, entries, tracks]')
       .skipUndefined()
       .where('id', req.query.id)
       .then(itineraries => res.send(itineraries))
       .catch(next);
   })
 
-  app.get('/playlist', (req, res, next) => {
-    Playlist
+  app.get('/track', (req, res, next) => {
+    Track
       .query()
       .skipUndefined()
       .where('id', req.query.id)
       .then(song => console.log(song))
       .catch(next)
+  })
+
+  app.post('/track', (req, res, next) => {
+    Track
+      .query()
+      .insertAndFetch(req.body)
+      .then((itinerary) => { res.send(itinerary) })
+      .catch(next);
   })
 };

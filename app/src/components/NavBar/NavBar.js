@@ -8,7 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 const NavBar = ({ isAuthenticated, onLoginClick, onLogoutClick }) =>
   <div>
-    <Navbar inverse>
+    <Navbar className='custom-nav' inverse>
       <Navbar.Header>
           <Link to='/home'>
           <Image className="cvrcle-logo-icon" src='./images/cvrcle-logo-icon.png' />
@@ -26,6 +26,7 @@ const NavBar = ({ isAuthenticated, onLoginClick, onLogoutClick }) =>
       </Nav>
       </Navbar.Collapse>
     </Navbar>
+
   </div>
 
 NavBar.propTypes = {
